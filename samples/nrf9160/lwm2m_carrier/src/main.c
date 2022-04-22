@@ -26,7 +26,7 @@ static void lte_event_handler(const struct lte_lc_evt *const evt)
 void print_err(const lwm2m_carrier_event_t *evt)
 {
 	const lwm2m_carrier_event_error_t *err =
-		(lwm2m_carrier_event_error_t *)evt->data;
+		(lwm2m_carrier_event_error_t *)evt->data.error;
 
 	static const char *strerr[] = {
 		[LWM2M_CARRIER_ERROR_NO_ERROR] =
@@ -58,13 +58,13 @@ void print_err(const lwm2m_carrier_event_t *evt)
 	__ASSERT(PART_OF_ARRAY(strerr[err->code]),
 		 "Unhandled liblwm2m_carrier error");
 
-	printk("%s, reason %d\n", strerr[err->code], err->value);
+	printk("%s, reason %d\n", strerr[err->type], err->value);
 }
 
 void print_deferred(const lwm2m_carrier_event_t *evt)
 {
 	const lwm2m_carrier_event_deferred_t *def =
-		(lwm2m_carrier_event_deferred_t *)evt->data;
+		(lwm2m_carrier_event_deferred_t *)evt->data.deferred;
 
 	static const char *strdef[] = {
 		[LWM2M_CARRIER_DEFERRED_NO_REASON] =
@@ -141,7 +141,7 @@ int lwm2m_carrier_event_handler(const lwm2m_carrier_event_t *event)
 		print_err(event);
 		break;
 	case LWM2M_CARRIER_EVENT_CERTS_INIT:
-		err = carrier_cert_provision((ca_cert_tags_t *)event->data);
+		err = carrier_cert_provision(event->data.certs_init);
 		break;
 	}
 

@@ -135,12 +135,16 @@ struct lwm2m_os_download_evt {
 	};
 };
 
+/** @brief Download client configuration values. */
+#define LWM2M_OS_DOWNLOAD_SEC_TAG_NONE -1
+
 /**
  * @brief Download client configuration options.
  */
 struct lwm2m_os_download_cfg {
+	/** Security tag to be used for TLS. Set to LWM2M_OS_DOWNLOAD_SEC_TAG_NONE if non-secure. */
 	int sec_tag;
-	int port;
+	/** PDN ID to be used for the download. */
 	int pdn_id;
 };
 
@@ -154,6 +158,7 @@ enum lwm2m_os_pdn_fam {
 	LWM2M_OS_PDN_FAM_IPV4,
 	LWM2M_OS_PDN_FAM_IPV6,
 	LWM2M_OS_PDN_FAM_IPV4V6,
+	LWM2M_OS_PDN_FAM_NONIP,
 };
 
 /** @brief PDN event */
