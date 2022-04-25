@@ -107,9 +107,8 @@ manifest:
       repo-path: sdk-mbedtls
       revision: v3.0.0-ncs1
     - name: nrfxlib
-      repo-path: sdk-nrfxlib
-      path: nrfxlib
-      revision: 420c9a3bfd22a2c7e9fb8c88a259b8e76c7d20b7
+      url: https://github.com/lemrey/sdk-nrfxlib
+      revision: pull/7/head
     - name: trusted-firmware-m
       repo-path: sdk-trusted-firmware-m
       path: modules/tee/tf-m/trusted-firmware-m
